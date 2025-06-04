@@ -1,17 +1,28 @@
 import React from 'react';
 import {useState} from 'react';
 import ReactDom from 'react-dom/client';
+import { useNavigate } from 'react-router-dom';
+
 
 function Step3() {
   const [occupation, setOccupation] = useState("");
   const [company, setCompany] = useState("");
   const [yearsOfExperience, setYearsOfExperience] = useState("");
   const [educationLevel, setEducationLevel] = useState("");
+  const navigate = useNavigate(); // <-- this allows programmatic navigation
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    
+    navigate("/step4");
+   };
 
   return (
     <div className='form-container'>
       <h2>Professional Information</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <label>Occupation:
             <input 

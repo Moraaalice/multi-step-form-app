@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import ReactDom from 'react-dom/client';
 import './style.css';
 
@@ -8,6 +9,8 @@ function Step1() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const navigate = useNavigate(); // <-- this allows programmatic navigation
+
 
   const isValidEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -26,6 +29,8 @@ function Step1() {
       email,
       phone,
     });
+        navigate("/step2");
+
   };
 
   return (
