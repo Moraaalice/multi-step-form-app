@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import ReactDom from 'react-dom/client';
 import './style.css';
 
+// The first step of the form,it has 4 fields
+// firstName,lastName,email and phone
 function Step1() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -11,25 +13,36 @@ function Step1() {
   const [phone, setPhone] = useState("");
   const navigate = useNavigate(); // <-- this allows programmatic navigation
 
-
+// Basic regex to check if the entered email is valid
   const isValidEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  
+// Prevents the default form submission behavior 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
+// Form validation:
+// First name and last name should not be empty
+// The email should pass the regex tex
+// And the phone number should be exactly 10 digits
     if (!firstName || !lastName || !isValidEmail(email) || phone.length !== 10) {
       alert("Please fill in all fields correctly.");
       return;
     }
-
-    console.log("Form Submitted", {
+// Retrieves existing data from localStorage and saves the new data and merging with any data to local storage
+    const existing = JSON.parse(localStorage.getItem('formData') || '{}');
+    const currentData = {
       firstName,
       lastName,
       email,
-      phone,
-    });
-        navigate("/step2");
+      phone
+    };
+    localStorage.setItem('formData', JSON.stringify({ ...existing, ...currentData }));
+
+    // Navigates the user to step 2
+    navigate("/step2");
 
   };
 

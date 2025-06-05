@@ -3,7 +3,8 @@ import {useState} from 'react';
 import ReactDom from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 
-
+// The third step of the form,it has 4 fields
+// occupation,company,years of experience and education level
 function Step3() {
   const [occupation, setOccupation] = useState("");
   const [company, setCompany] = useState("");
@@ -15,7 +16,23 @@ function Step3() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
+   const existing = JSON.parse(localStorage.getItem('formData') || '{}');
+    const currentData = {
+      occupation,
+      company,
+      yearsOfExperience,
+      educationLevel
+    };
+    localStorage.setItem('formData', JSON.stringify({ ...existing, ...currentData }));  
+
+// Validates input to make sure the value is not 0
+  if (parseInt(yearsOfExperience) < 0) {
+    alert("Years of experience cannot be negative.");
+    return;
+  }
+  
+
+  
     navigate("/step4");
    };
 
@@ -45,6 +62,7 @@ function Step3() {
           <label>Years of Experience:
             <input 
               type="number" 
+              min="0"
               value={yearsOfExperience} 
               onChange={(e) => setYearsOfExperience(e.target.value)} 
             />

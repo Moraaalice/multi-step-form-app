@@ -1,17 +1,36 @@
 import React from 'react';
 import {useState} from 'react';
 import ReactDom from 'react-dom/client';
+import { useNavigate } from 'react-router-dom';
 
+// The fourth step of the form,it has 4 fields
+// disability,allergies,insurance and health condition
 function Step4() {
   const [disability, setDisability] = useState("");
   const [allergies, setAllergies] = useState("");
   const [insurance, setInsurance] = useState("");
   const [healthCondition, setHealthCondition] = useState("");
+  const navigate = useNavigate(); // <-- this allows programmatic navigation
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+   const existing = JSON.parse(localStorage.getItem('formData') || '{}');
+    const currentData = {
+      disability,
+      allergies,
+      insurance,
+      healthCondition
+    };
+    localStorage.setItem('formData', JSON.stringify({ ...existing, ...currentData }));
+
+        navigate("/preview");
+  };    
 
   return (
     <div className='form-container'>
       <h2>Health Information</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <label> Disability Status:
             <input 

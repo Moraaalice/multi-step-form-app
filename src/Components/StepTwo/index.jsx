@@ -4,6 +4,8 @@ import ReactDom from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 
 
+// The second step of the form,it has 4 fields
+// streetAddress,city,state/province and postalCode
 function Step2() {
   const [streetAddress, setStreetAddress] = useState("");
   const [city, setCity] = useState("");
@@ -14,7 +16,18 @@ function Step2() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
+    // Retrieves existing data from localStorage and saves the new data and merging with any data to local storage
+
+    const existing = JSON.parse(localStorage.getItem('formData') || '{}');
+    const currentData = {
+      streetAddress,
+      city,
+      stateProvince,
+      postalCode
+    };
+    localStorage.setItem('formData', JSON.stringify({ ...existing, ...currentData }));
+
+    // Navigates the user to step 3
     navigate("/step3");
    };
 
