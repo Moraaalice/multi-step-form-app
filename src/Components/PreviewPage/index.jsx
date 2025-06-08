@@ -21,6 +21,8 @@ function Preview() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+         "Cache-Control": "no-cache",
+         "Pragma": "no-cache",
       },
       body: JSON.stringify(formData),
     });
