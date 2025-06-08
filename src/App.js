@@ -7,6 +7,7 @@ import Step2 from './Components/StepTwo';
 import Step3 from './Components/StepThree';
 import Step4 from './Components/StepFour';
 import Preview from './Components/PreviewPage';
+import SubmissionsList from './Components/Submissions';
 
 function App() {
   return (
@@ -18,9 +19,8 @@ function App() {
         <Route path="/step2" element={<Step2 />} />
         <Route path="/step3" element={<Step3/>} />
         <Route path="/step4" element={<Step4/>} />
-        <Route path="/preview" element={<Preview/>} />
-
-
+        <Route path="/preview" element={<Preview/>} />      
+        <Route path="/submissions" element={<SubmissionsList/>} />
       </Routes>
     </Router>
     </div>

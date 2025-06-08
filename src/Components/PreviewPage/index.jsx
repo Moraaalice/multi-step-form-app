@@ -15,11 +15,31 @@ function Preview() {
     navigate("/step4");
   };
 
-  const handleSubmit = () => {
-    alert("Submit clicked! Connect with backend to send data.");
-    // send formData to backend API here
-    // will come back after i'm done with backend
-  };
+  const handleSubmit = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/submit/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert(result.message || "Form submitted successfully!");
+      localStorage.removeItem("formData");
+      navigate("/"); // or a success page
+    } else {
+      alert("Failed to submit: " + result.error);
+    }
+    navigate("/submissions");
+  } catch (error) {
+    console.error("Submission error:", error);
+    alert("An error occurred. Please try again.");
+  }
+};
+
 
   return (
     <div className="preview-container">
@@ -38,10 +58,9 @@ function Preview() {
 
       <div className="preview-buttons">
         <button onClick={handleBack} className="preview-btn back-btn">Back</button>
-        <button onClick={handleSubmit} className="preview-btn submit-btn">Submit</button>
+        <button type="button" onClick={handleSubmit} className="preview-btn submit-btn">Submit</button>
       </div>
     </div>
   );
 }
-
 export default Preview;
