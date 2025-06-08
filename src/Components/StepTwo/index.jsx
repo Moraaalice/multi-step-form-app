@@ -12,9 +12,17 @@ function Step2() {
   const [stateProvince, setStateProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const navigate = useNavigate(); // <-- this allows programmatic navigation
+  const [error, setError] = useState(""); // Error state
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+     if (!streetAddress || !city || !stateProvince || !postalCode) {
+      setError("Please fill in all fields before continuing.");
+      return;
+    }
+    setError("");
 
     // Retrieves existing data from localStorage and saves the new data and merging with any data to local storage
 

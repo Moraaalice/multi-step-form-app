@@ -8,8 +8,8 @@ function Submissions() {
   useEffect(() => {
     console.log("Fetching submissions...");
 
-    fetch("http://127.0.0.1:8000/api/submit/", {
-      method: "GET",
+    fetch("https://backend-form-production.up.railway.app/api/submit/", {
+      method: "POST",
       headers: {
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
