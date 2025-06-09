@@ -31,7 +31,6 @@ Click Next to proceed through each step.
 
 On the final step, review your inputs on the Preview Page.
 
-Click Submit to file:///home/alice/Videos/Screencasts/Screencast%20from%2009-06-2025%2003:24:01%20ALASIRI.webm
-complete the process
+Click Submit to file complete the process
 
 
