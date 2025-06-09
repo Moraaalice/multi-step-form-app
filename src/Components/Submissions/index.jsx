@@ -30,7 +30,7 @@ function Submissions() {
 
   const startEdit = (index) => {
     setEditIndex(index);
-    setEditData({ ...submissions[index] }); // copy current submission data to edit
+    setEditData({ ...submissions[index] }); 
   };
 
   const cancelEdit = () => {
@@ -47,8 +47,8 @@ function Submissions() {
   };
 
   const saveEdit = () => {
-    fetch(`https://backend-form-production.up.railway.app/api/submit/${editData.id}/`, {
-      method: "PUT",
+    fetch(`https://backend-form-production.up.railway.app/submit/${editData.id}/update/`, {
+    method: "PUT",
       body: JSON.stringify(editData),
       headers: {
     "Content-Type": "application/json",
