@@ -8,14 +8,7 @@ function Submissions() {
   useEffect(() => {
     console.log("Fetching submissions...");
 
-    fetch("https://backend-form-production.up.railway.app/api/submit/", {
-      method: "POST",
-      headers: {
-        "Cache-Control": "no-cache",
-        "Pragma": "no-cache",
-        "Expires": "0",
-      },
-    })
+    fetch("https://backend-form-production.up.railway.app/api/submit/",)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
