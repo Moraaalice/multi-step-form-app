@@ -11,9 +11,16 @@ function Step4() {
   const [insurance, setInsurance] = useState("");
   const [healthCondition, setHealthCondition] = useState("");
   const navigate = useNavigate(); // <-- this allows programmatic navigation
+  const [error, setError] = useState(""); // Error state
 
     const handleSubmit = (e) => {
     e.preventDefault();
+
+      if (!disability || !allergies || !insurance || !healthCondition) {
+      setError("Please fill in all fields before continuing");
+      return;
+    }
+    setError("");
 
    const existing = JSON.parse(localStorage.getItem('formData') || '{}');
     const currentData = {
@@ -30,6 +37,7 @@ function Step4() {
   return (
     <div className='form-container'>
       <h2>Health Information</h2>
+      {error && <p >{error}</p>} 
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <label> Disability Status:

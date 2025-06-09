@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 
+// This code displays a preview of form data stored in localStorage, allowing users to review before submission. 
+// When submitted, it sends the data to a backend API and navigates to a submissions page on success.
+
+// Preview component to display form data before submission
 function Preview() {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
@@ -17,6 +21,7 @@ function Preview() {
 
   const handleSubmit = async () => {
   try {
+    // Send POST request to backend API
     const response = await fetch("https://backend-form-production.up.railway.app/api/submit/", {
       method: "POST",
       headers: {
@@ -26,7 +31,7 @@ function Preview() {
       },
       body: JSON.stringify(formData),
     });
-
+  //Parse response JSON
     const result = await response.json();
     if (response.ok) {
       alert(result.message || "Form submitted successfully!");
@@ -37,11 +42,15 @@ function Preview() {
     }
     navigate("/submissions");
   } catch (error) {
+    // Network or other errors
     console.error("Submission error:", error);
     alert("An error occurred. Please try again.");
   }
 };
 
+
+//The return statement renders a preview UI showing all stored form data in a clean, labeled format, 
+//with "Back" and "Submit" buttons. It displays each form field (with formatted keys) and its value, or a "No data" message if empty.
 
   return (
     <div className="preview-container">

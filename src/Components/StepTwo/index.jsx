@@ -19,7 +19,7 @@ function Step2() {
     e.preventDefault();
 
      if (!streetAddress || !city || !stateProvince || !postalCode) {
-      setError("Please fill in all fields before continuing.");
+      setError("Please fill in all fields before continuing");
       return;
     }
     setError("");
@@ -42,6 +42,7 @@ function Step2() {
   return (
     <div className='form-container'>
       <h2>Address Information</h2>
+      {error && <p >{error}</p>} 
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <label>Street Address:

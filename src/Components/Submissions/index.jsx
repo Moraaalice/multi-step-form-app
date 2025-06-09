@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import './style.css';
 
+// This component fetches and displays form submissions from a backend API, allowing users to view and edit each submission. 
+// It manages loading/error states and provides a toggle between view and edit modes for each submission record, with full CRUD functionality for updating data.
 function Submissions() {
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -8,6 +10,7 @@ function Submissions() {
   const [editIndex, setEditIndex] = useState(null);
   const [editData, setEditData] = useState({});
 
+    // Fetch submissions data 
   useEffect(() => {
     fetch("https://backend-form-production.up.railway.app/api/submit/")
       .then((res) => {
@@ -24,10 +27,13 @@ function Submissions() {
       });
   }, []);
 
+  // Render different states
+
   if (loading) return <p>Loading submissions...</p>;
   if (error) return <p>Error: {error}</p>;
   if (submissions.length === 0) return <p>No submissions found.</p>;
 
+    // Edit handlers
   const startEdit = (index) => {
     setEditIndex(index);
     setEditData({ ...submissions[index] }); 
@@ -37,6 +43,7 @@ function Submissions() {
     setEditIndex(null);
     setEditData({});
   };
+  // Handle input changes during editing
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,6 +53,7 @@ function Submissions() {
     }));
   };
 
+    // Save edited data to backend
   const saveEdit = () => {
     fetch(`https://backend-form-production.up.railway.app/submit/${editData.id}/update/`, {
     method: "PUT",
@@ -243,7 +251,6 @@ function Submissions() {
                     onChange={handleChange}
                   />
                 </label>
-                {/* Add other fields you want editable */}
                 <button onClick={saveEdit}>Save</button>{" "}
                 <button onClick={cancelEdit}>Cancel</button>
               </>

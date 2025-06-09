@@ -3,6 +3,7 @@ import {useState} from 'react';
 import ReactDom from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 
+
 // The third step of the form,it has 4 fields
 // occupation,company,years of experience and education level
 function Step3() {
@@ -11,10 +12,18 @@ function Step3() {
   const [yearsOfExperience, setYearsOfExperience] = useState("");
   const [educationLevel, setEducationLevel] = useState("");
   const navigate = useNavigate(); // <-- this allows programmatic navigation
+  const [error, setError] = useState(""); // Error state
+  
   
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+      if (!occupation || !company || !yearsOfExperience || !educationLevel) {
+      setError("Please fill in all fields before continuing");
+      return;
+    }
+    setError("");
 
    const existing = JSON.parse(localStorage.getItem('formData') || '{}');
     const currentData = {
@@ -39,6 +48,7 @@ function Step3() {
   return (
     <div className='form-container'>
       <h2>Professional Information</h2>
+      {error && <p >{error}</p>} 
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <label>Occupation:
